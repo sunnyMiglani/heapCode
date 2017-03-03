@@ -24,7 +24,7 @@ h_node heap[ARRAY_SIZE];
 /////////////////////////////////////
 void initHeap();
 void heapify(int sort_point_pid);
-int getLeft(int this)
+int getLeft(int this);
 int getRight(int this);
 int getParent(int this);
 void swapNodes(int a, int b); // swaps nodes
@@ -36,7 +36,7 @@ void editNode(int pid, int priority);
 int extractMax();
 void setBasePrior(int pid,int b_priority);
 void heapify(int sort_point_pid);
-
+////////////////////////////////////////
 
 void main()
 {
