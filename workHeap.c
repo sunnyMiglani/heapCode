@@ -1,4 +1,7 @@
 //workHeap.c
+// Author : Sunny M
+// University of Bristol
+// 2017
  #include "workHeap.h"
 
  /*

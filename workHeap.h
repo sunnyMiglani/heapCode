@@ -1,4 +1,6 @@
 //workHeap.h
+// Author : Sunny M
+// University of Bristol
 
 #include <stdbool.h>
 #include <stddef.h>
