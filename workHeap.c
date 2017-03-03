@@ -36,13 +36,13 @@ void initHeap()
 
 int getLeft(int this)
 {
-  if(2*this < HEAP_SIZE/2){return 2*this;}
+  if(2*this < HEAP_SIZE){return 2*this;}
   else return this;
 }
 
 int getRight(int this)
 {
-  if((2*this)+1 < HEAP_SIZE/2){return ((2*this)+1);}
+  if((2*this)+1 < HEAP_SIZE){return ((2*this)+1);}
   else return this;
 }
 
