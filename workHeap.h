@@ -11,3 +11,6 @@ typedef struct heap_node_struct{
   int base_prior;
   int pid_val;
 }h_node;
+
+
+void heapify(int sort_point_pid); // Main heapsort function, see readme for reference

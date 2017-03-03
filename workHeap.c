@@ -22,20 +22,21 @@ int  HEAP_SIZE;
 #define ARRAY_SIZE 300
 h_node heap[ARRAY_SIZE];
 /////////////////////////////////////
-void initHeap();
-void heapify(int sort_point_pid);
-int getLeft(int this);
-int getRight(int this);
-int getParent(int this);
+void initHeap(); // Creates the heap structure + initialises the struct created in workHeap.h
+void heapify(int sort_point_pid); // Main heapsort function, see readme for reference
+int getLeft(int this); // Get's the left child index
+int getRight(int this); // Get's the right child index
+int getParent(int this); // Get's the parent's index
 void swapNodes(int a, int b); // swaps nodes
-int getIndexOfUnused();
-int getIndexFromPID(int pid);
-void insertNode(int priority,int pid);
-void delNode(int pid);
-void editNode(int pid, int priority);
-int extractMax();
-void setBasePrior(int pid,int b_priority);
-void heapify(int sort_point_pid);
+int getIndexOfUnused(); // gets the index of the last unused part of the heap (this is assuming the heap has a fixed size before adding process)
+  // I.e it does not dynamically increase the heap size unless it reaches a size of HEAP_SIZE/2 ~(150 for now)
+int getIndexFromPID(int pid); // gets the index of struct from the pid value inside it
+void insertNode(int priority,int pid); // "inserts" a node in the heap, actual heap size increase is in getIndexOfUnused()
+void delNode(int pid); // "deletes" a node, TODO: maybe call heapify after deleting a node to maintain heap property
+void editNode(int pid, int priority); // Changes the values (priority) in a heap struct
+int extractMax(); // Get's the max , it also calls heapify
+void setBasePrior(int pid,int b_priority); // Specific to my implementation-use for this, can be removed / ignored
+void heapify(int sort_point_pid); // Main sortting yo.
 ////////////////////////////////////////
 
 void main()
@@ -135,6 +136,14 @@ void setBasePrior(int pid,int b_priority)
 
 void heapify(int sort_point_pid)
 {
+
+  /*
+    This would be much faster / easier with pointers to the values as opposed to always referencing the
+    heap[] array,
+    you could just make a h_node* left_child_ptr = heap[left_child] and use it forward, but since this project does not use / need malloc
+    it's been skipped by just referencing the array[] constantly.
+  */
+
   int largestVal = 0;
   int largestPos = 0;
 
