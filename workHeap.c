@@ -19,18 +19,38 @@
 
 
 int  HEAP_SIZE;
-#define ARRAY_SIZE 300;
+#define ARRAY_SIZE 300
 h_node heap[ARRAY_SIZE];
+/////////////////////////////////////
+void initHeap();
+void heapify(int sort_point_pid);
+int getLeft(int this)
+int getRight(int this);
+int getParent(int this);
+void swapNodes(int a, int b); // swaps nodes
+int getIndexOfUnused();
+int getIndexFromPID(int pid);
+void insertNode(int priority,int pid);
+void delNode(int pid);
+void editNode(int pid, int priority);
+int extractMax();
+void setBasePrior(int pid,int b_priority);
+void heapify(int sort_point_pid);
 
+
+void main()
+{
+  initHeap();
+}
 
 void initHeap()
 {
   HEAP_SIZE = ARRAY_SIZE / 2;
   for(int i=0;i<ARRAY_SIZE;i++) // initialsies ALL of the elements in the heap so there's no problem with getIndexOfUnused
   {
-    heap[i]->pid_val = -1;
-    heap[i]->priority = 0;
-    heap[i]->base_prior = 0;
+    heap[i].pid_val = -1;
+    heap[i].priority = 0;
+    heap[i].base_prior = 0;
   }
 }
 
@@ -62,7 +82,7 @@ int getIndexOfUnused()
 {
   for(int i= 0; i <HEAP_SIZE;i++)
   {
-    if(heap[i]->pid_val == -1 ) {return i;}
+    if(heap[i].pid_val == -1 ) {return i;}
   }
   HEAP_SIZE++; // Increases heapsize and returns the value it just created
   return HEAP_SIZE-1;
@@ -72,7 +92,7 @@ int getIndexFromPID(int pid)
 {
   for(int i=0;i<HEAP_SIZE;i++)
   {
-    if(heap[i]->pid_val == pid) { return i;}
+    if(heap[i].pid_val == pid) { return i;}
   }
   {insertNode(0,pid); // in the case the pid isn't actually part of the heap, it adds a new node
   return getIndexFromPID(pid);}
@@ -81,36 +101,36 @@ int getIndexFromPID(int pid)
 void insertNode(int priority,int pid)
 {
   int insert_point = getIndexOfUnused();
-  heap[insert_point]->pid_val = pid;
-  heap[insert_point]->priority=priority;
+  heap[insert_point].pid_val = pid;
+  heap[insert_point].priority=priority;
 }
 
 void delNode(int pid)
 {
   int del_point = getIndexFromPID(pid);
-  heap[del_point]->pid_val = -1;
-  heap[del_point]->priority = 0;
-  heap[del_point]->base_prior = 0;
+  heap[del_point].pid_val = -1;
+  heap[del_point].priority = 0;
+  heap[del_point].base_prior = 0;
 }
 
 void editNode(int pid, int priority)
 {
   int edit_point = getIndexFromPID(pid);
-  heap[edit_point]->priority = priority;
+  heap[edit_point].priority = priority;
 }
 
-int extractMax() // TODO Add heapify here? with swap.
+int extractMax()
 {
   h_node max = heap[0];
-  int pid_to_return = max->pid_val;
-  delNode(max->pid_val);
+  int pid_to_return = max.pid_val;
+  delNode(max.pid_val);
   return pid_to_return;
 }
 
 void setBasePrior(int pid,int b_priority)
 {
-  int edit_point = getNodeFromPID(pid);
-  heap[edit_point]->base_prior = b_priority;
+  int edit_point = getIndexFromPID(pid);
+  heap[edit_point].base_prior = b_priority;
 }
 
 void heapify(int sort_point_pid)
@@ -123,9 +143,9 @@ void heapify(int sort_point_pid)
   int right_child = getRight(sort_point);
 
 
-  int p_left = heap[left_child]->priority;
-  int p_right = heap[right_child]->priority;
-  int p_parent = heap[sort_point]->priority;
+  int p_left = heap[left_child].priority;
+  int p_right = heap[right_child].priority;
+  int p_parent = heap[sort_point].priority;
 
 
   if(left_child < HEAP_SIZE && p_left > p_parent) {
@@ -147,5 +167,5 @@ void heapify(int sort_point_pid)
     swapNodes(largestPos,sort_point);
     heapify(largestPos);
   }
-  // TODO : Basic Values for priorities.
+
 }
